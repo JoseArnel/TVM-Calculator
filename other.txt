@@ -1,0 +1,37 @@
+Goals to implement
+
+
+# Old Age Security
+def OAS():
+    age = float(input("Age Arrived in Canada"))
+    oas = (65-age) * (1/age) * 613.53
+    print("Current OAS: {:.3f}".format(oas))
+    defered = float(input("defered for how many yeasrs"))
+
+# Canada Pension Plan 
+# CPP Contribution = (lower of annual income or YMBE - YBE) * contribution rate
+def CPP():
+    ympe = float(input("YMPE "))
+    employed = bool(input("Self Employed (T/F) "))
+    if (employed):
+        cpp = (ympe - 3500) * 0.0525
+    else:
+        cpp = (ympe - 3500) * 0.105
+    print("CPP Contribution Amount: {:.3f}".format(cpp))
+
+
+# FV = PV * (1 + i) ** n
+# FVa = pmt((((1 + i)^n) - 1) / 1)
+def FutureValue():
+    pv = int(input("Present Value: "))
+    i = float(input("Interest(%): "))/100
+    n = int(input("Number of Periods: "))
+    # pmt = float(input("Paymennt Amount: "))
+    # fv = pmt*(((pv * (1 + i)**n) - 1) / 1)
+    fv = pv * (1 + i) ** n
+    # fv = pv*(1+i)**n
+    save = input("Do you wanna save the values? (y/n) ")
+    if (save == "y"):
+        print("create")
+        createResults(pv, 0, i, n, fv)
+    print("Future Value: {:.2f}".format(fv))
