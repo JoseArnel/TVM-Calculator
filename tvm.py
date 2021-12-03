@@ -4,37 +4,59 @@ from os import system, name
 def clear():
     _ = system('clear')
 
-def CompoundInterest():
-    principal = float(input())
-    rate = float(input())
-    period = float(input())
-
-    ci_future = principal * (math.pow(1 + rate/100), period)
-    compound = ci_future - principal
-
-def CalcInvestment():
-    purcahse_price = int(input("Purchase Price: "))
-    sale_price = float(input("Sale Price: "))
-    dividends = float(input("Dividends: "))
-    per_return = (((sale_price-purcahse_price)+dividends)/purcahse_price)*100
-    print("Percentage Return: {:.2f}%".format(per_return))
-
 def txtClear():
     resultsTxt = open("results.txt", "r+")
     resultsTxt.truncate(0)
     resultsTxt.close()
 
-def createResults(pv, fv, i, n, result):
+def createResults(x, pv, fv, i, n, pmt):
     resultsTxt = open("results.txt", 'a')
-    resultsTxt.write(" ------ Final Results ------ \n")
-    resultsTxt.write("Present Value : " + str(pv) + "\n")
-    resultsTxt.write("Future Value : " + str(fv) + "\n")
-    resultsTxt.write("Interest: " + str(i) + "\n")
-    resultsTxt.write("Periods: " + str(n) + "\n")
-    resultsTxt.write("Result: " + str(result))
-    # resultsTxt.write("Payment: ", pmt)
+    resultsTxt.write(" ------ Input ------ \n")
+    if x in ( 1, 2, 3, 4, 5):
+        #FutureValue
+        if x == 1:
+            resultsTxt.write("Present Value: " + str(pv) + "\n")
+            resultsTxt.write("Interest: " + str(i) + "\n")
+            resultsTxt.write("Periods: " + str(n) + "\n")
+            resultsTxt.write("Payment: " + str(pmt) + "\n")
+            resultsTxt.write(" ------ Answer ------ \n")
+            resultsTxt.write("Future Value: " + str(fv) + "\n")
+        #PresentValue
+        elif x == 2:
+            resultsTxt.write("Future Value: " + str(fv) + "\n")
+            resultsTxt.write("Interest: " + str(i) + "\n")
+            resultsTxt.write("Periods: " + str(n) + "\n")
+            resultsTxt.write("Payment: " + str(pmt) + "\n")
+            resultsTxt.write(" ------ Answer ------ \n")
+            resultsTxt.write("Present Value: " + str(pv) + "\n")
+        #Interest
+        elif x == 3:
+            resultsTxt.write("Present Value: " + str(pv) + "\n")
+            resultsTxt.write("Future Value: " + str(fv) + "\n")
+            resultsTxt.write("Periods: " + str(n) + "\n")
+            resultsTxt.write("Payment: " + str(pmt) + "\n")
+            resultsTxt.write(" ------ Answer ------ \n")
+            resultsTxt.write("Interest: " + str(i) + "\n")
+        #Period
+        elif x == 4:
+            resultsTxt.write("Present Value: " + str(pv) + "\n")
+            resultsTxt.write("Future Value: " + str(fv) + "\n")
+            resultsTxt.write("Interest: " + str(i) + "\n")
+            resultsTxt.write("Payment: " + str(pmt) + "\n")
+            resultsTxt.write(" ------ Answer ------ \n")
+            resultsTxt.write("Periods: " + str(n) + "\n")
+        #Payment
+        else:
+            resultsTxt.write("Present Value: " + str(pv) + "\n")
+            resultsTxt.write("Future Value: " + str(fv) + "\n")
+            resultsTxt.write("Interest: " + str(i) + "\n")
+            resultsTxt.write("Periods: " + str(n) + "\n")
+            resultsTxt.write(" ------ Answer ------ \n")
+            resultsTxt.write("Payment: " + str(pmt) + "\n")
     resultsTxt.close()
 
+# FV = PV * (1 + i) ** n
+# FVa = A/i * ((((1 + i)^n) - 1) / 1)
 def FutureValue():
     pv = int(input("Present Value: "))
     i = float(input("Interest(%): "))/100
@@ -51,7 +73,7 @@ def FutureValue():
             resultsTxt.close()
     print("Future Value = ${:.2f}".format(fv))
     if (save == "y"):
-        createResults(pv, 0, i, n, fv)
+        createResults(1, pv, fv, i, n, pmt)
 
 # PV = FV / (1 + i) ** n
 # PVa = A/i * [1 - 1/ (1 + i)^n ]
@@ -68,26 +90,34 @@ def PresentValue():
             resultsTxt = open("results.txt", 'a')
             resultsTxt.write("Period:" + str(x) + " PV:{:.2f}".format(pv) + " PMT:" + str(pmt) + " Interest:{:.2f}".format(p_i) + " FV:{:.2f}".format(fv) + "\n")
             resultsTxt.close()
-        print("Period:" + str(x) +  " FV:{:.2f}".format(fv) + " PMT:" + str(pmt) + " Interest:{:.2f}".format(p_i) + " PV:{:.2f}".format(pv))
         fv = pv
     print("Present Value = ${:.2f}".format(pv))
-
+    if (save == "y"):
+        createResults(1, pv, fv, i, n, pmt)
 
 # i = ((FV / PV) ** (1 / n)) - 1
 def Interest():
     pv = int(input("Present Value: "))
     fv = int(input("Future Value: "))
     n = int(input("Number of Periods: "))
+    pmt = int(input("Payment: "))
+    save = input("Would you wanna save the values? (y/n) ")
     i = (((fv / pv)**(1/n)) - 1) * 100
     print("Interest: {:0.3f}%".format(i))
+    if (save == "y"):
+        createResults(1, pv, fv, i, n, pmt)
 
 # n = LN(FV / PV) / LN (1 + i)
 def Period():
     pv = int(input("Present Value: "))
     fv = int(input("Future Value: "))
     i = float(input("Interest(%): "))/100
+    pmt = int(input("Payment: "))
+    save = input("Would you wanna save the values? (y/n) ")
     n = math.log(fv / pv) / math.log(1 + i)
     print("Number of Period: {:.3f}".format(n))
+    if (save == "y"):
+        createResults(4, pv, fv, i, n, pmt)
 
 def printDisplay():
     print("Select Operation")
@@ -126,9 +156,9 @@ while True:
         elif choice == 4:
             clear()
             Period()
-
     else:
         print("Input Invalid")
+        print("0 to see menu")
     
     next_calc = str(input("Continue? (y/n): "))
     if (next_calc == 'y'):
@@ -137,6 +167,7 @@ while True:
         break
     else: 
         print("Input Invalid")
+
 
 
 
