@@ -25,7 +25,8 @@ def txtClear():
     resultsTxt.close()
 
 def createResults(pv, fv, i, n, result):
-    resultsTxt = open("results.txt", 'w+')
+    resultsTxt = open("results.txt", 'a')
+    resultsTxt.write(" ------ Final Results ------ \n")
     resultsTxt.write("Present Value : " + str(pv) + "\n")
     resultsTxt.write("Future Value : " + str(fv) + "\n")
     resultsTxt.write("Interest: " + str(i) + "\n")
@@ -49,8 +50,8 @@ def FutureValue():
             resultsTxt.write("Period:" + str(x) + " PV:{:.2f}".format(pv) + " PMT:" + str(pmt) + " Interest:{:.2f}".format(p_i) + " FV:{:.2f}".format(fv) + "\n")
             resultsTxt.close()
     print("Future Value = ${:.2f}".format(fv))
-    # if (save == "y"):
-    #     createResults(pv, 0, i, n, fv)
+    if (save == "y"):
+        createResults(pv, 0, i, n, fv)
 
 # PV = FV / (1 + i) ** n
 # PVa = A/i * [1 - 1/ (1 + i)^n ]
@@ -58,8 +59,19 @@ def PresentValue():
     fv = int(input("Future Value: "))
     i = float(input("Interest(%): "))/100
     n = int(input("Number of Periods: "))
-    pv = fv/((1+i)**n)
-    print("Present Value: {:.2f}".format(pv))
+    pmt = int(input("Payment: "))
+    save = input("Would you wanna save the values? (y/n) ")
+    for x in range(0,n):
+        pv = (fv - pmt) / (1 + i)
+        p_i= pv * i
+        if (save == "y"):
+            resultsTxt = open("results.txt", 'a')
+            resultsTxt.write("Period:" + str(x) + " PV:{:.2f}".format(pv) + " PMT:" + str(pmt) + " Interest:{:.2f}".format(p_i) + " FV:{:.2f}".format(fv) + "\n")
+            resultsTxt.close()
+        print("Period:" + str(x) +  " FV:{:.2f}".format(fv) + " PMT:" + str(pmt) + " Interest:{:.2f}".format(p_i) + " PV:{:.2f}".format(pv))
+        fv = pv
+    print("Present Value = ${:.2f}".format(pv))
+
 
 # i = ((FV / PV) ** (1 / n)) - 1
 def Interest():
