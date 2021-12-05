@@ -20,7 +20,7 @@ def createResults(x, pv, fv, i, n, pmt):
             resultsTxt.write("Periods: " + str(n) + "\n")
             resultsTxt.write("Payment: " + str(pmt) + "\n")
             resultsTxt.write(" ------ Answer ------ \n")
-            resultsTxt.write("Future Value: " + str(fv) + "\n")
+            resultsTxt.write("Future Value: {:.3f} \n".format(fv))
         #PresentValue
         elif x == 2:
             resultsTxt.write("Future Value: " + str(fv) + "\n")
@@ -58,10 +58,10 @@ def createResults(x, pv, fv, i, n, pmt):
 # FV = PV * (1 + i) ** n
 # FVa = A/i * ((((1 + i)^n) - 1) / 1)
 def FutureValue():
-    pv = int(input("Present Value: "))
+    pv = int(input("Present Value($): "))
     i = float(input("Interest(%): "))/100
     n = int(input("Number of Periods: "))
-    pmt = int(input("Payment: "))
+    pmt = int(input("Payment($): "))
     save = input("Would you like to save the values? (y/n) ")
     for x in range(0,n):
         p_i= pv * i
@@ -78,10 +78,10 @@ def FutureValue():
 # PV = FV / (1 + i) ** n
 # PVa = A/i * [1 - 1/ (1 + i)^n ]
 def PresentValue():
-    fv = int(input("Future Value: "))
+    fv = int(input("Future Value($): "))
     i = float(input("Interest(%): "))/100
     n = int(input("Number of Periods: "))
-    pmt = int(input("Payment: "))
+    pmt = int(input("Payment($): "))
     save = input("Would you like to save the values? (y/n) ")
     for x in range(0,n):
         pv = (fv - pmt) / (1 + i)
@@ -97,22 +97,22 @@ def PresentValue():
 
 # i = ((FV / PV) ** (1 / n)) - 1
 def Interest():
-    pv = int(input("Present Value: "))
-    fv = int(input("Future Value: "))
+    pv = int(input("Present Value($): "))
+    fv = int(input("Future Value($): "))
     n = int(input("Number of Periods: "))
-    pmt = int(input("Payment: "))
+    pmt = int(input("Payment($): "))
     save = input("Would you like to save the values? (y/n) ")
-    
+    i = ((fv / pv) ** (1 / n)) - 1
     print("Interest: {:0.3f}%".format(i))
     if (save == "y"):
         createResults(1, pv, fv, i, n, pmt)
 
 # n = LN(FV / PV) / LN (1 + i)
 def Period():
-    pv = int(input("Present Value: "))
-    fv = int(input("Future Value: "))
+    pv = int(input("Present Value($): "))
+    fv = int(input("Future Value($): "))
     i = float(input("Interest(%): "))/100
-    pmt = int(input("Payment: "))
+    pmt = int(input("Payment($): "))
     save = input("Would you like to save the values? (y/n) ")
     n = math.log(fv / pv) / math.log(1 + i)
     print("Number of Period: {:.3f}".format(n))
@@ -120,9 +120,9 @@ def Period():
         createResults(4, pv, fv, i, n, pmt)
 
 def Payment():
-    pv = int(input("Present Value: "))
-    fv = int (input("Future Value: "))
-    i = float(input("Interest(%): ")) 
+    pv = int(input("Present Value($): "))
+    fv = int (input("Future Value($): "))
+    i = float(input("Interest(%): "))/100
     n = int(input("Period: "))
     pmt = (pv - (fv/((1+i)**n))) / ((1 - (1 / ((1 + i) ** n)))/i)
     print("Monthly Payment Amount: {:.3f}".format(pmt))
