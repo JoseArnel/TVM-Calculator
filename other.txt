@@ -63,3 +63,46 @@ def CalcInvestment():
     dividends = float(input("Dividends: "))
     per_return = (((sale_price-purcahse_price)+dividends)/purcahse_price)*100
     print("Percentage Return: {:.2f}%".format(per_return))
+
+
+pv = int(input("Present Value: "))
+fv = float(input("Future Value: "))
+n = int(input("Number of Periods: "))
+pmt = int(input("Payment: "))
+save = input("Would you wanna save the values? (y/n) ")
+i = (((fv - pmt) / pv) - 1) * 100
+for x in range(0, n):
+
+# i = (((fv / pv)**(1/n)) - 1) * 100
+print("Interest: {:0.3f}%".format(i))
+
+# pv = pmt ( pv*i) - FVn
+# FV12  
+
+# pv = pmt + (pv*i) - fv
+# pv - (pv*i) = pmt - fv
+# pv (1 - (1 * i))= pmt - fv
+# pv(1 + i )
+# 1 - (1 * i) = (pmt - fv) / pv
+# - (1 * i) = ((pmt - fv) / pv) - 1
+# 
+
+# fv = pv + pmt + (pv*i)
+# pv = fv - pmt - (pv*i)
+# pv + (pv*i) = fv - pmt 
+# pv(1 + i) = fv - pmt 
+# 1 + i = (fv - pmt) / pv
+# i = ((fv - pmt) / pv) - 1
+ 
+# pv (1 - i) / pv = (pmt - fv) / pv
+# 1 - i = (pmt - fv) / pv
+# - i = ((pmt - fv) / pv) - 1
+# i = -1 (((pmt - fv) / pv) - 1)
+
+# fv = pv + pmt + (pv- i)
+# fv - pmt =  pv + (pv - i)
+# fv - pmt = pv (1 + (1 - i))
+# (fv - pmt) / pv = 1 + (1 - i)
+# ((fv - pmt) / pv) - 1) = 1 - i
+# (((fv - pmt) / pv) - 1) - 1) = -i 
+# (-1) * (((fv - pmt) / pv) - 1) - 1)) = i
