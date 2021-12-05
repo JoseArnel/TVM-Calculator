@@ -63,7 +63,7 @@ def FutureValue():
     n = int(input("Number of Periods: "))
     pmt = int(input("Payment($): "))
     save = input("Would you like to save the values? (y/n) ")
-    for x in range(0,n):
+    for x in range(1,n+1):
         p_i= pv * i
         fv = pv + p_i - pmt
         pv = fv
@@ -83,7 +83,7 @@ def PresentValue():
     n = int(input("Number of Periods: "))
     pmt = int(input("Payment($): "))
     save = input("Would you like to save the values? (y/n) ")
-    for x in range(0,n):
+    for x in range(1,n+1):
         pv = (fv - pmt) / (1 + i)
         p_i= pv * i
         if (save == "y"):
@@ -161,29 +161,28 @@ while True:
         if choice == 0:
             clear()
             printDisplay()
-
         elif choice == 1:
             txtClear()
             clear()
             FutureValue()
-        
         elif choice == 2:
+            txtClear()
             clear()
             PresentValue()
-        
         elif choice == 3:
+            txtClear()
             clear()
             Interest()
-        
         elif choice == 4:
+            txtClear()
             clear()
             Period()
         elif choice == 5:
+            txtClear()
             clear()
             Payment()
     else:
-        print("Input Invalid")
-        print("0 to see menu")
+        print("Input Invalid, 0 to see menu")
     
     next_calc = str(input("Continue? (y/n): "))
     if (next_calc == 'y'):
