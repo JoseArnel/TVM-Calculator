@@ -1,4 +1,5 @@
 import math
+import numpy as np
 from os import system, name
 
 def clear():
@@ -119,6 +120,7 @@ def Period():
     if (save == "y"):
         createResults(4, pv, fv, i, n, pmt)
 
+# pmt = (pv - (fv/((1+i)**n))) / ((1 - (1 / ((1 + i) ** n)))/i)
 def Payment():
     pv = int(input("Present Value($): "))
     fv = int (input("Future Value($): "))

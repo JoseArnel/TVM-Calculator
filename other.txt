@@ -1,7 +1,6 @@
 Goals to implement
 
 - Fix Period, Interest Function with Paymennt
-- Implement Payment
 - Implement C/Y, P/Y, end of the month
 
 # fv = pv + pmt + (pv*i)
