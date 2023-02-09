@@ -1,0 +1,10 @@
+Period:1 PV:20996.00 PMT:4 Interest:20000.00 FV:20996.00
+Period:2 PV:440912.00 PMT:4 Interest:419920.00 FV:440912.00
+Period:3 PV:9259148.00 PMT:4 Interest:8818240.00 FV:9259148.00
+ ------ Input ------ 
+Present Value: 9259148.0
+Interest: 20.0
+Periods: 3
+Payment: 4
+ ------ Answer ------ 
+Future Value: 9259148.000 
