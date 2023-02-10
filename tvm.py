@@ -13,7 +13,7 @@ def txtClear():
 def createResults(x, pv, fv, i, n, pmt):
     resultsTxt = open("results.txt", 'a')
     resultsTxt.write(" ------ Input ------ \n")
-    if x in ( 1, 2, 3, 4, 5):
+    if x in ( 1, 2, 3, 4, 5, 6):
         #FutureValue
         if x == 1:
             resultsTxt.write("Present Value: " + str(pv) + "\n")
@@ -47,6 +47,13 @@ def createResults(x, pv, fv, i, n, pmt):
             resultsTxt.write(" ------ Answer ------ \n")
             resultsTxt.write("Periods: {:.3f} \n".format(n))
         #Payment
+        elif x == 5:
+            resultsTxt.write("Present Value: " + str(pv) + "\n")
+            resultsTxt.write("Future Value: " + str(fv) + "\n")
+            resultsTxt.write("Interest: " + str(i) + "\n")
+            resultsTxt.write("Periods: " + str(n) + "\n")
+            resultsTxt.write(" ------ Answer ------ \n")
+            resultsTxt.write("Monthly Payment Amount: {:.3f} \n".format(pmt))
         else:
             resultsTxt.write("Present Value: " + str(pv) + "\n")
             resultsTxt.write("Future Value: " + str(fv) + "\n")
@@ -54,7 +61,24 @@ def createResults(x, pv, fv, i, n, pmt):
             resultsTxt.write("Periods: " + str(n) + "\n")
             resultsTxt.write(" ------ Answer ------ \n")
             resultsTxt.write("Monthly Payment Amount: {:.3f} \n".format(pmt))
+
     resultsTxt.close()
+
+# ROI = ((PV - FV) / FV) * 100
+def ROI():
+    pv = int(input("Amount Invested($): "))
+    fv = float(input("Amounted Returned($): "))
+    # i = float(input("Investment Length: ")) # 2.75
+    save = input("Would you like to save the values? (y/n) ")
+    roi = ((fv - pv) / pv) * 100
+    gain = fv - pv
+    print("Investment Gain = ${:.2f}".format(gain))
+    print("Return on Investment = {:.2f}%".format(roi))
+
+    if (save == "y"):
+        createResults(1,pv, fv, 0, 0,0)
+
+# Investment
 
 # FV = PV * (1 + i) ** n
 # FVa = A/i * ((((1 + i)^n) - 1) / 1)
@@ -149,6 +173,7 @@ def printDisplay():
     print("3.Interest")
     print("4.Periods")
     print("5.Payment")
+    print("6.Return On Investments")
 printDisplay()
 
 while True:
@@ -157,9 +182,9 @@ while True:
     if choice == 0:
         clear()
         printDisplay()
-        choice = int(input("Enter choice (0/1/2/3/4/5): "))
+        choice = int(input("Enter choice (0/1/2/3/4/5/6): "))
 
-    if choice in ( 1, 2, 3, 4, 5):
+    if choice in ( 1, 2, 3, 4, 5, 6):
         if choice == 0:
             clear()
             printDisplay()
@@ -183,6 +208,10 @@ while True:
             txtClear()
             clear()
             Payment()
+        elif choice == 6:
+            txtClear()
+            clear()
+            ROI()
     else:
         print("Input Invalid, 0 to see menu")
     
