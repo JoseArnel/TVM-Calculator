@@ -86,7 +86,7 @@ def FutureValue():
     pv = int(input("Present Value($): "))
     i = float(input("Interest(%): "))/100
     n = int(input("Number of Periods: "))
-    pmt = int(input("Payment($): "))
+    pmt = int(input("Payment($): ")) * -1
     save = input("Would you like to save the values? (y/n) ")
     for x in range(1,n+1):
         p_i= pv * i
