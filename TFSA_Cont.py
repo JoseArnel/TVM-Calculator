@@ -1,3 +1,4 @@
+import math
 # created 2009 
 def TFSA():
     limit = [5000, 5000, 5000, 5000, 5500, 5500, 1000, 5500, 5500, 5500, 6000, 6000, 6000, 6000, 6500]
@@ -18,6 +19,42 @@ def TFSA():
 # Dates
 # Students Loans
 # RetireBy
-def RetireBy():
+def Milli():
+    pv = int(input("Present Value($): "))
+    i = float(input("Interest(%): "))/100
+    # n = int(input("Number of Periods: "))
+    pmt = int(input("Payment($): ")) * -1
+    # x = FutureValue(pv, i, n, pmt)
+    x = 1000000
+    fv = 0
+    count = 0
 
-TFSA()
+    # CHECK ON LOOOOP
+    for x in range(100):
+        print(x)
+        count = count + 1
+        print(count)
+        fv = FutureValue(pv, i, count, pmt)
+        if fv > x:
+            print("y")
+            break
+
+    # # save = input("Would you like to save the values? (y/n) ")
+    # n = math.log(fv / pv) / math.log(1 + i)
+    # print("Goal " + str(fv))
+    # print("Number of Years: {:.3f}".format(n))
+
+def FutureValue(pv, i, n, pmt):
+    for x in range(1,n+1):
+        p_i= pv * i
+        fv = pv + p_i - pmt
+        pv = fv
+    print("Future Value = ${:.2f}".format(fv))
+    return(fv)
+
+Milli()
+# def compunt_interest(principal, rate, time):
+#         amount = principal * (pow((1 + rate / 100), time))
+#         CI = Amount  - principal
+#         print ("Compund inerest is"
+
