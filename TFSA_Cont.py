@@ -24,20 +24,21 @@ def Milli():
     i = float(input("Interest(%): "))/100
     # n = int(input("Number of Periods: "))
     pmt = int(input("Payment($): ")) * -1
-    # x = FutureValue(pv, i, n, pmt)
-    x = 1000000
-    fv = 0
-    count = 0
+    target = 1000000
 
+    count = 0
     # CHECK ON LOOOOP
     for x in range(100):
-        print(x)
-        count = count + 1
-        print(count)
+        count += 1
         fv = FutureValue(pv, i, count, pmt)
-        if fv > x:
-            print("y")
+        print(fv)
+        if (fv > target):
+            print(count)
             break
+
+    # for x in range(10):
+    #     i = x
+    #     print(i)
 
     # # save = input("Would you like to save the values? (y/n) ")
     # n = math.log(fv / pv) / math.log(1 + i)
@@ -49,7 +50,7 @@ def FutureValue(pv, i, n, pmt):
         p_i= pv * i
         fv = pv + p_i - pmt
         pv = fv
-    print("Future Value = ${:.2f}".format(fv))
+    # print("Future Value = ${:.2f}".format(fv))
     return(fv)
 
 Milli()
