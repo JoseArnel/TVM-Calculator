@@ -29,19 +29,30 @@ def Milli():
     for x in range(100):
         count += 1
         fv = FutureValue(pv, i, count, pmt)
+        interest = InterestFutureValue(pv, i, count, pmt)
         if (fv > target):
             print("It will take you " + str(count) + "yrs to make your first million.")
             print("Millionaire by the age of " + str(count+18))
+            print(interest)
             break
 
+# ADVANCE Fv
 def FutureValue(pv, i, n, pmt):
+    
     for x in range(1,n+1):
         p_i= pv * i
         fv = pv + p_i - pmt
         pv = fv
     return(fv)
     
-TFSA()
+def InterestFutureValue(pv, i, n, pmt):
+    sum = -pv
+    for y in range(1, n+1):
+        print(sum)
+        sum += pmt
+    return(-1*sum)
+
+Milli()
 
 
 
