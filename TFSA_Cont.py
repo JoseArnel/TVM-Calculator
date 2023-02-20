@@ -24,6 +24,7 @@ def Milli():
     pv = int(input("Present Value($): "))
     i = float(input("Interest(%): "))/100
     pmt = int(input("Contributions($): ")) * -1
+    calc = input("Would you like to show the calculations (y/n)")
 
     count = 0
     for x in range(100):
@@ -38,11 +39,17 @@ def Milli():
 
 # ADVANCE Fv
 def FutureValue(pv, i, n, pmt):
+    principal = pv 
     
     for x in range(1,n+1):
         p_i= pv * i
         fv = pv + p_i - pmt
+        print("principal:{:.2f}".format(principal) + "start balance::{:.2f}".format(principal+p_i) +   " interest:{:.2f}".format(p_i) + "end balance:{:.2f}".format(fv))
+        principal = principal - pmt
         pv = fv
+    # print("start principle start balance, interest, end balance, end principal")
+
+    # ("Future Value: {:.3f} \n".format(fv))
     return(fv)
     
 def InterestFutureValue(pv, i, n, pmt):
@@ -52,7 +59,9 @@ def InterestFutureValue(pv, i, n, pmt):
         sum += pmt
     return(-1*sum)
 
-Milli()
+
+FutureValue(50000, 0.07, 31, -6000)
+
 
 
 
