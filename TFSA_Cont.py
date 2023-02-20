@@ -39,13 +39,19 @@ def Milli():
 
 # ADVANCE Fv
 def FutureValue(pv, i, n, pmt):
-    principal = pv 
+    principal_s = pv 
+    balance_s = pv 
+    principal_e = pv
     
     for x in range(1,n+1):
         p_i= pv * i
         fv = pv + p_i - pmt
-        print("principal:{:.2f}".format(principal) + "start balance::{:.2f}".format(principal+p_i) +   " interest:{:.2f}".format(p_i) + "end balance:{:.2f}".format(fv))
-        principal = principal - pmt
+        principal_e = principal_s - pmt
+        print("start_principal " + " start_balance" +   " interest " + " end_balance " + " end_principal ")
+        print("{:.2f}".format(principal_s) +  "        " + "{:.2f}".format(balance_s) +  "     " + "{:.2f}".format(p_i)  + "  " + "{:.2f}".format(fv) +  "    " + "{:.2f}".format(principal_e))
+        # print("principal:{:.2f}".format(principal_s) + "start balance::{:.2f}".format(balance_s) +   " interest:{:.2f}".format(p_i) + "end balance:{:.2f}".format(fv) + "end balance:{:.2f}".format(principal_e))
+        principal_s = principal_s - pmt
+        balance_s = fv
         pv = fv
     # print("start principle start balance, interest, end balance, end principal")
 
