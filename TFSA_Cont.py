@@ -1,4 +1,8 @@
 import math
+from os import system, name
+
+def clear():
+    _ = system('clear')
 
 def TFSA():
     limit = [5000, 5000, 5000, 5000, 5500, 5500, 1000, 5500, 5500, 5500, 6000, 6000, 6000, 6000, 6500]
@@ -21,7 +25,7 @@ def TFSA():
 # RetireBy
 def Milli():
     target = 1000000
-    pv = int(input("Present Value($): "))
+    pv = int(input("Principal Value($): "))
     i = float(input("Interest(%): "))/100
     pmt = int(input("Contributions($): ")) * -1
     calc = input("Would you like to show the calculations (y/n)")
@@ -29,44 +33,46 @@ def Milli():
     count = 0
     for x in range(100):
         count += 1
-        fv = FutureValue(pv, i, count, pmt)
+        fv = FutureValue(calc, pv, i, count, pmt)
         interest = InterestFutureValue(pv, i, count, pmt)
         if (fv > target):
-            print("It will take you " + str(count) + "yrs to make your first million.")
-            print("Millionaire by the age of " + str(count+18))
-            print(interest)
+            print("It will take you " + str(count) + "yrs to be a millionaire by: " + str(count+18) + " \n")
             break
 
 # ADVANCE Fv
-def FutureValue(pv, i, n, pmt):
+def FutureValue(calc, pv, i, n, pmt):
     principal_s = pv 
     balance_s = pv 
     principal_e = pv
-    
-    for x in range(1,n+1):
-        p_i= pv * i
-        fv = pv + p_i - pmt
-        principal_e = principal_s - pmt
-        print("start_principal " + " start_balance" +   " interest " + " end_balance " + " end_principal ")
-        print("{:.2f}".format(principal_s) +  "        " + "{:.2f}".format(balance_s) +  "     " + "{:.2f}".format(p_i)  + "  " + "{:.2f}".format(fv) +  "    " + "{:.2f}".format(principal_e))
-        # print("principal:{:.2f}".format(principal_s) + "start balance::{:.2f}".format(balance_s) +   " interest:{:.2f}".format(p_i) + "end balance:{:.2f}".format(fv) + "end balance:{:.2f}".format(principal_e))
-        principal_s = principal_s - pmt
-        balance_s = fv
-        pv = fv
-    # print("start principle start balance, interest, end balance, end principal")
-
-    # ("Future Value: {:.3f} \n".format(fv))
+    clear()
+    if (calc == 'y'):
+        for x in range(1,n+1):
+            p_i= pv * i
+            fv = pv + p_i - pmt
+            principal_e = principal_s - pmt
+            print("   start_principal " + " start_balance" +   " interest " + " end_balance " + " end_principal ")
+            print(str(x) + " " +"{:.2f}".format(principal_s) +  "        " + "{:.2f}".format(balance_s) +  "     " + "{:.2f}".format(p_i)  + "  " + "{:.2f}".format(fv) +  "    " + "{:.2f}".format(principal_e))
+            # print("principal:{:.2f}".format(principal_s) + "start balance::{:.2f}".format(balance_s) +   " interest:{:.2f}".format(p_i) + "end balance:{:.2f}".format(fv) + "end balance:{:.2f}".format(principal_e))
+            principal_s = principal_s - pmt
+            balance_s = fv
+            pv = fv
+        print(" ")
+    else:
+        for x in range(1,n+1):
+            p_i= pv * i
+            fv = pv + p_i - pmt
+            pv = fv
     return(fv)
     
+
 def InterestFutureValue(pv, i, n, pmt):
     sum = -pv
     for y in range(1, n+1):
-        print(sum)
         sum += pmt
     return(-1*sum)
 
-
-FutureValue(50000, 0.07, 31, -6000)
+Milli()
+# FutureValue(50000, 0.07, 31, -6000)
 
 
 
