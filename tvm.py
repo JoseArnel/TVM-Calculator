@@ -1,9 +1,13 @@
 import math
 import numpy as np
+import datetime 
 from os import system, name
 
 def clear():
     _ = system('clear')
+
+def date():
+    return (str(datetime.date.today()))
 
 def txtClear():
     resultsTxt = open("results.txt", "r+")
@@ -16,6 +20,7 @@ def createResults(x, pv, fv, i, n, pmt):
     if x in ( 1, 2, 3, 4, 5, 6):
         #FutureValue
         if x == 1:
+            resultsTxt.write(date())
             resultsTxt.write("Present Value: " + str(pv) + "\n")
             resultsTxt.write("Interest: " + str(i) + "\n")
             resultsTxt.write("Periods: " + str(n) + "\n")
