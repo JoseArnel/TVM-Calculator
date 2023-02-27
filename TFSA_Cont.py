@@ -1,8 +1,12 @@
 import math
 from os import system, name
 import datetime
+
 def clear():
     _ = system('clear')
+
+def date():
+    print(datetime.date.today())
 
 
 def TFSA():
@@ -21,21 +25,19 @@ def TFSA():
         acc += limit[i]
     print(f'${acc:,d}')
 
-# Dates
+# Implement Graph
 # Students Loans
-# RetireBy
 def Milli():
     target = 1000000
     pv = int(input("Principal Value($): "))
     i = float(input("Interest(%): "))/100
     pmt = int(input("Contributions($): ")) * -1
     calc = input("Would you like to show the calculations (y/n) ")
-
     count = 0
     for x in range(100):
         count += 1
         fv = FutureValue(calc, pv, i, count, pmt)
-        interest = InterestFutureValue(pv, i, count, pmt)
+        # interest = InterestFutureValue(pv, i, count, pmt)
         if (fv > target):
             print("It will take you " + str(count) + "years to be a millionaire by: " + str(count+18) + " \n")
             break
@@ -71,16 +73,10 @@ def InterestFutureValue(pv, i, n, pmt):
         sum += pmt
     return(-1*sum)
 
-def date():
-    print(datetime.date.today())
-
-date()
-
-# Milli()
 
 
 
 # def compunt_interest(principal, rate, time):
 #         amount = principal * (pow((1 + rate / 100), time))
 #         CI = Amount  - principal
-#         print ("Compund inerest is"
+#         print ("Compund inerest is")
