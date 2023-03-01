@@ -29,6 +29,7 @@ def createResults(x, pv, fv, i, n, pmt):
             resultsTxt.write("Future Value: {:.3f} \n".format(fv))
         #PresentValue
         elif x == 2:
+            resultsTxt.write(date())
             resultsTxt.write("Future Value: " + str(fv) + "\n")
             resultsTxt.write("Interest: " + str(i) + "\n")
             resultsTxt.write("Periods: " + str(n) + "\n")
@@ -37,6 +38,7 @@ def createResults(x, pv, fv, i, n, pmt):
             resultsTxt.write("Present Value: {:.3f} \n".format(pv))
         #Interest
         elif x == 3:
+            resultsTxt.write(date())
             resultsTxt.write("Present Value: " + str(pv) + "\n")
             resultsTxt.write("Future Value: " + str(fv) + "\n")
             resultsTxt.write("Periods: " + str(n) + "\n")
@@ -45,6 +47,7 @@ def createResults(x, pv, fv, i, n, pmt):
             resultsTxt.write("Annual Interest: {:.3f} \n".format(i))
         #Period
         elif x == 4:
+            resultsTxt.write(date())
             resultsTxt.write("Present Value: " + str(pv) + "\n")
             resultsTxt.write("Future Value: " + str(fv) + "\n")
             resultsTxt.write("Interest: " + str(i) + "\n")
@@ -53,6 +56,7 @@ def createResults(x, pv, fv, i, n, pmt):
             resultsTxt.write("Periods: {:.3f} \n".format(n))
         #Payment
         elif x == 5:
+            resultsTxt.write(date())
             resultsTxt.write("Present Value: " + str(pv) + "\n")
             resultsTxt.write("Future Value: " + str(fv) + "\n")
             resultsTxt.write("Interest: " + str(i) + "\n")
@@ -60,6 +64,7 @@ def createResults(x, pv, fv, i, n, pmt):
             resultsTxt.write(" ------ Answer ------ \n")
             resultsTxt.write("Monthly Payment Amount: {:.3f} \n".format(pmt))
         else:
+            resultsTxt.write(date())
             resultsTxt.write("Present Value: " + str(pv) + "\n")
             resultsTxt.write("Future Value: " + str(fv) + "\n")
             resultsTxt.write("Interest: " + str(i) + "\n")
