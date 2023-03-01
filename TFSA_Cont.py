@@ -25,6 +25,12 @@ def TFSA():
         acc += limit[i]
     print(f'${acc:,d}')
 
+def PorfolioAlloc():
+    value = int(input("Protfolio Value($): "))
+
+
+# EPS, Stock Breka down Soo called.
+
 # Implement Graph
 # Students Loans
 def Milli():
@@ -74,6 +80,10 @@ def InterestFutureValue(pv, i, n, pmt):
     return(-1*sum)
 
 TFSA()
+
+
+
+
 
 
 # def compunt_interest(principal, rate, time):
