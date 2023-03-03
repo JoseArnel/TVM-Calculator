@@ -28,7 +28,7 @@ def TFSA():
 def PorfolioAlloc():
     value = int(input("Protfolio Value($): "))
 
-
+# for fun 
 # EPS, Stock Breka down Soo called.
 
 # Implement Graph
