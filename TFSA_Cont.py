@@ -31,7 +31,8 @@ def PorfolioAlloc():
 # for fun 
 # EPS, Stock Breka down Soo called.
 
-# Implement Graph
+# Implement Graph, Pyhton, Database,
+
 # Students Loans
 def Milli():
     target = 1000000
@@ -82,7 +83,10 @@ def InterestFutureValue(pv, i, n, pmt):
 TFSA()
 
 
-
+def left2(str):
+  front = str[2:]
+  end = str[:2]
+  return(front + end)
 
 
 
