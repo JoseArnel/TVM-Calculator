@@ -88,6 +88,32 @@ def left2(str):
   end = str[:2]
   return(front + end)
 
+def count_evens(nums):
+  count = 0
+  for i in range(len(nums)):
+    if nums[i] % 2 == 0:
+      count += 1
+  return count
+
+def big_diff(nums):
+  big = 0 
+  small = nums[0]
+  for i in range(len(nums)):
+    if nums[i] > big:
+      big = nums[i]
+    elif nums[i] < small:
+      small = nums[i]
+  return (big-small)
+
+def big_diff(nums):
+  largest = 0
+  for i in range(len(nums)-1):
+    x = abs(nums[i] - nums[i+1])
+    if (x >= largest):
+      largest = x
+  return largest
+  
+
 
 
 # def compunt_interest(principal, rate, time):
