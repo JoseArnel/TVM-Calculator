@@ -68,7 +68,7 @@ def write_csv(n, year, value):
 def FutureValue(calc, pv, i, n, pmt):
   with open('investment.csv', 'w', newline='') as file:
     writer = csv.writer(file)
-    writer.writerow(["Year", "value"])
+    writer.writerow(["Year", "Balance", "Principal", "Interest"])
     principal_s = pv 
     balance_s = pv 
     principal_e = pv
@@ -81,10 +81,10 @@ def FutureValue(calc, pv, i, n, pmt):
             print("   start_principal " + " start_balance" +   " interest " + " end_balance " + " end_principal ")
             print(str(x) + " " +"{:.2f}".format(principal_s) +  "        " + "{:.2f}".format(balance_s) +  "     " + "{:.2f}".format(p_i)  + "  " + "{:.2f}".format(fv) +  "    " + "{:.2f}".format(principal_e))
             # print("principal:{:.2f}".format(principal_s) + "start balance::{:.2f}".format(balance_s) +   " interest:{:.2f}".format(p_i) + "end balance:{:.2f}".format(fv) + "end balance:{:.2f}".format(principal_e))
+            writer.writerow([x, round(fv), round(principal_s), round(fv-principal_s)])
             principal_s = principal_s - pmt
             balance_s = fv
             pv = fv
-            writer.writerow([x, round(pv)])
         print(" ")
     else:
         for x in range(1,n+1):
