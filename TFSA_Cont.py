@@ -1,13 +1,20 @@
 import math
 from os import system, name
 import datetime
+import csv
+
+def write_csv(n, year, value):
+  with open('investment.csv', 'w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerow(["Year", "value"])
+    for i in range(0,n):
+      writer.writerow([year, value,])
 
 def clear():
     _ = system('clear')
 
 def date():
     print(datetime.date.today())
-
 
 def TFSA():
     limit = [5000, 5000, 5000, 5000, 5500, 5500, 1000, 5500, 5500, 5500, 6000, 6000, 6000, 6000, 6500]
@@ -50,7 +57,18 @@ def Milli():
             break
 
 # ADVANCE Fv
+
+def write_csv(n, year, value):
+  with open('investment.csv', 'w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerow(["Year", "value"])
+    for i in range(0,n):
+      writer.writerow([year, value,])
+
 def FutureValue(calc, pv, i, n, pmt):
+  with open('investment.csv', 'w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerow(["Year", "value"])
     principal_s = pv 
     balance_s = pv 
     principal_e = pv
@@ -66,6 +84,7 @@ def FutureValue(calc, pv, i, n, pmt):
             principal_s = principal_s - pmt
             balance_s = fv
             pv = fv
+            writer.writerow([x, round(pv)])
         print(" ")
     else:
         for x in range(1,n+1):
@@ -80,38 +99,10 @@ def InterestFutureValue(pv, i, n, pmt):
         sum += pmt
     return(-1*sum)
 
-TFSA()
+# write_csv()
 
+Milli()
 
-def left2(str):
-  front = str[2:]
-  end = str[:2]
-  return(front + end)
-
-def count_evens(nums):
-  count = 0
-  for i in range(len(nums)):
-    if nums[i] % 2 == 0:
-      count += 1
-  return count
-
-def big_diff(nums):
-  big = 0 
-  small = nums[0]
-  for i in range(len(nums)):
-    if nums[i] > big:
-      big = nums[i]
-    elif nums[i] < small:
-      small = nums[i]
-  return (big-small)
-
-def big_diff(nums):
-  largest = 0
-  for i in range(len(nums)-1):
-    x = abs(nums[i] - nums[i+1])
-    if (x >= largest):
-      largest = x
-  return largest
   
 
 
