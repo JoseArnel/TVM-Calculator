@@ -3,6 +3,15 @@ import numpy as np
 import datetime 
 from os import system, name
 
+####
+# main screan, TVM Calculator / Other Financial Calc 
+# Display Screen, Terminal Based, Display Graphs, Can save as CSV, and 
+# Extra Tools: Millionare, before ..., TFSA Calculations, Interest
+#### 
+
+## Check List
+# Implement Charts, Expand, Clean up
+
 def clear():
     _ = system('clear')
 
@@ -10,7 +19,7 @@ def date():
     return (str(datetime.date.today()))
 
 def txtClear():
-    resultsTxt = open("results.txt", "r+")
+    resultsTxt = open("results.txt", "r+") 
     resultsTxt.truncate(0)
     resultsTxt.close()
 

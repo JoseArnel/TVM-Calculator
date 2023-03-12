@@ -21,6 +21,9 @@ def tvm_visualizer():
     plt.plot(data.PMT / 10**6)
     plt.plot(data.Interest / 10**6)
     plt.plot(data.FV / 10**6)
+    plt.legend(['PV', 'PMT', 'I', 'FV'])
+    plt.xlabel('Year')
+    plt.ylabel('$(Millions)')
     plt.show()
 
 def write_csv(n, year, value):
@@ -150,7 +153,6 @@ def InterestFutureValue(pv, i, n, pmt):
 tvm_visualizer()
 
   
-
 
 
 # def compunt_interest(principal, rate, time):
