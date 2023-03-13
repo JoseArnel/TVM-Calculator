@@ -6,7 +6,7 @@ import pandas as pd
 from matplotlib import pyplot as plt
 
 def interest_visualizer():
-    data = pd.read_csv('investment.csv')
+    data = pd.read_csv('interest.csv')
     plt.plot(data.Balance / 10**6)
     plt.plot(data.Principal / 10**6)
     plt.plot(data.Interest / 10**6)
@@ -80,7 +80,6 @@ def Milli():
             break
 
 # ADVANCE Fv
-
 def write_csv(n, year, value):
   with open('investment.csv', 'w', newline='') as file:
     writer = csv.writer(file)
@@ -150,7 +149,7 @@ def InterestFutureValue(pv, i, n, pmt):
         sum += pmt
     return(-1*sum)
 
-tvm_visualizer()
+interest_visualizer()
 
   
 
