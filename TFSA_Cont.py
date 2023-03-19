@@ -185,7 +185,18 @@ def InterestFutureValue(pv, i, n, pmt):
 
 Milli()
 
-  
+def sum67(nums):
+  sum = 0
+  flag = True 
+  for i in range(len(nums)):
+    if (nums[i] == 6): 
+      flag = False
+    if (flag == True):
+      sum = sum + nums[i]
+    if (nums[i] == 7): 
+      flag = True
+  return sum
+      
 
 
 # def compunt_interest(principal, rate, time):
