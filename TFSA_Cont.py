@@ -16,12 +16,12 @@ def interest_visualizer():
     plt.show()
 
 def tvm_visualizer():
-    data = pd.read_csv('tvm.csv')
+    data = pd.read_csv('tvm_graph.csv')
     plt.plot(data.PV / 10**6)
-    plt.plot(data.PMT / 10**6)
-    plt.plot(data.Interest / 10**6)
+    plt.plot(data.SumofPMT / 10**6)
+    plt.plot(data.AccumulatedInterest / 10**6)
     plt.plot(data.FV / 10**6)
-    plt.legend(['PV', 'PMT', 'I', 'FV'])
+    plt.legend(['PV', 'SumofPMT', 'AccumulatedInterest', 'FV'])
     plt.xlabel('Year')
     plt.ylabel('$(Millions)')
     plt.show()
@@ -73,7 +73,7 @@ def Milli():
     count = 0
     for x in range(100):
         count += 1
-        fv = FutureValue3(calc, pv, i, count, pmt)
+        fv = tvm_graph(calc, pv, i, count, pmt)
         # interest = InterestFutureValue(pv, i, count, pmt)
         if (fv > target):
             print("It will take you " + str(count) + "years to be a millionaire by: " + str(count+18) + " \n")
@@ -118,7 +118,7 @@ def FutureValue(calc, pv, i, n, pmt):
 # sum of interests
 # total interests
 #Sum of all periodic payments
-def FutureValue2(calc, pv, i, n, pmt):
+def tvm_val(calc, pv, i, n, pmt):
   with open('tvm.csv', 'w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(["Year", "PV", "PMT", "Interest", "FV"])
@@ -145,16 +145,15 @@ def FutureValue2(calc, pv, i, n, pmt):
             pv = fv
     return(fv)
         
-def FutureValue3(calc, pv, i, n, pmt):
-  with open('tvm.csv', 'w', newline='') as file:
+def tvm_graph(calc, pv, i, n, pmt):
+  with open('tvm_graph.csv', 'w', newline='') as file:
     writer = csv.writer(file)
-    writer.writerow(["Year", "PV", "Sum of PMT", "Accumulated Interest", "FV"])
+    writer.writerow(["Year", "PV", "SumofPMT", "AccumulatedInterest", "FV"])
     principal_s = pv 
     balance_s = pv 
     principal_e = pv
     sum_pmt = 0
     sum_int = 0
-
     clear()
     if (calc == 'y'):
         for x in range(1,n+1):
@@ -183,21 +182,7 @@ def InterestFutureValue(pv, i, n, pmt):
         sum += pmt
     return(-1*sum)
 
-Milli()
-
-def sum67(nums):
-  sum = 0
-  flag = True 
-  for i in range(len(nums)):
-    if (nums[i] == 6): 
-      flag = False
-    if (flag == True):
-      sum = sum + nums[i]
-    if (nums[i] == 7): 
-      flag = True
-  return sum
-      
-
+tvm_visualizer()
 
 # def compunt_interest(principal, rate, time):
 #         amount = principal * (pow((1 + rate / 100), time))
