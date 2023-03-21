@@ -65,7 +65,7 @@ def interest_calc(calc, pv, i, n, pmt):
 # total interests
 #Sum of all periodic payments
 def tvm_calc(calc, pv, i, n, pmt):
-  with open('tvm.csv', 'w', newline='') as file:
+  with open('tvm1.csv', 'w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(["Year", "PV", "PMT", "Interest", "FV"])
     principal_s = pv 
@@ -157,10 +157,10 @@ def Milli():
             print("It will take you " + str(count) + "years to be a millionaire by: " + str(count+18) + " \n")
             break
 
-tvm_visualizer()
+tvm_calc('y', 50000, 0.07, 31, -6000)
 
 # def PorfolioAlloc():
-    value = int(input("Protfolio Value($): "))
+#    value = int(input("Protfolio Value($): "))
 
 # for fun 
 # EPS, Stock Breka down Soo called.

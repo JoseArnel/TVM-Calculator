@@ -1,4 +1,5 @@
 import math
+import csv
 import numpy as np
 import datetime 
 from os import system, name
@@ -107,17 +108,22 @@ def FutureValue():
     n = int(input("Number of Periods: "))
     pmt = int(input("Payment($): ")) * -1
     save = input("Would you like to save the values? (y/n) ")
-    for x in range(1,n+1):
-        p_i= pv * i
-        fv = pv + p_i - pmt
-        pv = fv
+    
+    with open('tvm.csv', 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["Year" , "PV", "PMT", "Interest", "FV"])
+        for x in range(1,n+1):
+            p_i= pv * i
+            fv = pv + p_i - pmt
+            if (save == "y"):
+                writer.writerow([x, round(pv), round(-pmt), round(p_i), round(-fv)])
+                resultsTxt = open("results.txt", 'a')
+                resultsTxt.write("Period:" + str(x) + " PV:{:.2f}".format(pv) + " PMT:" + str(pmt) + " Interest:{:.2f}".format(p_i) + " FV:{:.2f}".format(fv) + "\n")
+                resultsTxt.close()
+            pv = fv
+        print("Future Value = ${:.2f}".format(fv))
         if (save == "y"):
-            resultsTxt = open("results.txt", 'a')
-            resultsTxt.write("Period:" + str(x) + " PV:{:.2f}".format(pv) + " PMT:" + str(pmt) + " Interest:{:.2f}".format(p_i) + " FV:{:.2f}".format(fv) + "\n")
-            resultsTxt.close()
-    print("Future Value = ${:.2f}".format(fv))
-    if (save == "y"):
-        createResults(1, pv, fv, i, n, pmt)
+            createResults(1, pv, fv, i, n, pmt)
 
 # PV = FV / (1 + i) ** n
 # PVa = A/i * [1 - 1/ (1 + i)^n ]
