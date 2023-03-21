@@ -5,26 +5,11 @@ import csv
 import pandas as pd
 from matplotlib import pyplot as plt
 
-def interest_visualizer():
-    data = pd.read_csv('interest.csv')
-    plt.plot(data.Balance / 10**6)
-    plt.plot(data.Principal / 10**6)
-    plt.plot(data.Interest / 10**6)
-    plt.legend(['Balance', 'Interest', 'Principal'])
-    plt.xlabel("Year")
-    plt.ylabel("$(Millions)")
-    plt.show()
+def clear():
+    _ = system('clear')
 
-def tvm_visualizer():
-    data = pd.read_csv('tvm_graph.csv')
-    plt.plot(data.PV / 10**6)
-    plt.plot(data.SumofPMT / 10**6)
-    plt.plot(data.AccumulatedInterest / 10**6)
-    plt.plot(data.FV / 10**6)
-    plt.legend(['PV', 'SumofPMT', 'AccumulatedInterest', 'FV'])
-    plt.xlabel('Year')
-    plt.ylabel('$(Millions)')
-    plt.show()
+def date():
+    print(datetime.date.today())
 
 def write_csv(n, year, value):
   with open('investment.csv', 'w', newline='') as file:
@@ -32,12 +17,6 @@ def write_csv(n, year, value):
     writer.writerow(["Year", "value"])
     for i in range(0,n):
       writer.writerow([year, value,])
-
-def clear():
-    _ = system('clear')
-
-def date():
-    print(datetime.date.today())
 
 def TFSA():
     limit = [5000, 5000, 5000, 5000, 5500, 5500, 1000, 5500, 5500, 5500, 6000, 6000, 6000, 6000, 6500]
@@ -55,39 +34,7 @@ def TFSA():
         acc += limit[i]
     print(f'${acc:,d}')
 
-def PorfolioAlloc():
-    value = int(input("Protfolio Value($): "))
-
-# for fun 
-# EPS, Stock Breka down Soo called.
-
-# Implement Graph, Pyhton, Database,
-
-# Students Loans
-def Milli():
-    target = 1000000
-    pv = int(input("Principal Value($): "))
-    i = float(input("Interest(%): "))/100
-    pmt = int(input("Contributions($): ")) * -1
-    calc = input("Would you like to show the calculations (y/n) ")
-    count = 0
-    for x in range(100):
-        count += 1
-        fv = tvm_graph(calc, pv, i, count, pmt)
-        # interest = InterestFutureValue(pv, i, count, pmt)
-        if (fv > target):
-            print("It will take you " + str(count) + "years to be a millionaire by: " + str(count+18) + " \n")
-            break
-
-# ADVANCE Fv
-def write_csv(n, year, value):
-  with open('investment.csv', 'w', newline='') as file:
-    writer = csv.writer(file)
-    writer.writerow(["Year", "value"])
-    for i in range(0,n):
-      writer.writerow([year, value,])
-
-def FutureValue(calc, pv, i, n, pmt):
+def interest_calc(calc, pv, i, n, pmt):
   with open('interest.csv', 'w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(["Year", "Balance", "Principal", "Interest"])
@@ -115,10 +62,9 @@ def FutureValue(calc, pv, i, n, pmt):
             pv = fv
     return(fv)
 
-# sum of interests
 # total interests
 #Sum of all periodic payments
-def tvm_val(calc, pv, i, n, pmt):
+def tvm_calc(calc, pv, i, n, pmt):
   with open('tvm.csv', 'w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(["Year", "PV", "PMT", "Interest", "FV"])
@@ -175,16 +121,48 @@ def tvm_graph(calc, pv, i, n, pmt):
             fv = pv + p_i - pmt
             pv = fv
     return(fv)
-        
-def InterestFutureValue(pv, i, n, pmt):
-    sum = -pv
-    for y in range(1, n+1):
-        sum += pmt
-    return(-1*sum)
+
+def interest_visualizer():
+    data = pd.read_csv('interest.csv')
+    plt.plot(data.Balance / 10**6)
+    plt.plot(data.Principal / 10**6)
+    plt.plot(data.Interest / 10**6)
+    plt.legend(['Balance', 'Interest', 'Principal'])
+    plt.xlabel("Year")
+    plt.ylabel("$(Millions)")
+    plt.show()
+
+def tvm_visualizer():
+    data = pd.read_csv('tvm_graph.csv')
+    plt.plot(data.PV / 10**6)
+    plt.plot(data.SumofPMT / 10**6)
+    plt.plot(data.AccumulatedInterest / 10**6)
+    plt.plot(data.FV / 10**6)
+    plt.legend(['PV', 'SumofPMT', 'AccumulatedInterest', 'FV'])
+    plt.xlabel('Year')
+    plt.ylabel('$(Millions)')
+    plt.show()
+
+def Milli():
+    target = 1000000
+    pv = int(input("Principal Value($): "))
+    i = float(input("Interest(%): "))/100
+    pmt = int(input("Contributions($): ")) * -1
+    calc = input("Would you like to show the calculations (y/n) ")
+    count = 0
+    for x in range(100):
+        count += 1
+        fv = tvm_graph(calc, pv, i, count, pmt)
+        if (fv > target):
+            print("It will take you " + str(count) + "years to be a millionaire by: " + str(count+18) + " \n")
+            break
 
 tvm_visualizer()
 
-# def compunt_interest(principal, rate, time):
-#         amount = principal * (pow((1 + rate / 100), time))
-#         CI = Amount  - principal
-#         print ("Compund inerest is")
+# def PorfolioAlloc():
+    value = int(input("Protfolio Value($): "))
+
+# for fun 
+# EPS, Stock Breka down Soo called.
+# Implement Graph, Pyhton, Database,
+# Students Loans
