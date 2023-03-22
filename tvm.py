@@ -2,6 +2,8 @@ import math
 import csv
 import numpy as np
 import datetime 
+import pandas as pd
+from matplotlib import pyplot as plt
 from os import system, name
 
 ####
@@ -23,6 +25,18 @@ def txtClear():
     resultsTxt = open("results.txt", "r+") 
     resultsTxt.truncate(0)
     resultsTxt.close()
+
+def tvm_visualizer():
+    data = pd.read_csv('tvm_graph.csv')
+    plt.plot(data.PV / 10**6)
+    plt.plot(data.SumofPMT / 10**6)
+    plt.plot(data.AccumulatedInterest / 10**6)
+    plt.plot(data.FV / 10**6)
+    plt.legend(['PV', 'SumofPMT', 'AccumulatedInterest', 'FV'])
+    plt.xlabel('Year')
+    plt.ylabel('$(Millions)')
+    plt.show()
+
 
 def createResults(x, pv, fv, i, n, pmt):
     resultsTxt = open("results.txt", 'a')
