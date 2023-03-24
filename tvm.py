@@ -27,21 +27,25 @@ def txtClear():
     resultsTxt.close()
 
 def tvm_visualizer():
-    data = pd.read_csv('tvm_graph.csv')
-    plt.plot(data.PV / 10**6)
-    plt.plot(data.SumofPMT / 10**6)
-    plt.plot(data.AccumulatedInterest / 10**6)
-    plt.plot(data.FV / 10**6)
-    plt.legend(['PV', 'SumofPMT', 'AccumulatedInterest', 'FV'])
-    plt.xlabel('Year')
-    plt.ylabel('$(Millions)')
-    plt.show()
+    choice = str(input("Would you like to show the values? (y/n) "))
+    if (choice == 'y'):
+        data = pd.read_csv('tvm_graph.csv')
+        plt.plot(data.PV / 10**6)
+        plt.plot(data.SumofPMT / 10**6)
+        plt.plot(data.AccumulatedInterest / 10**6)
+        plt.plot(data.FV / 10**6)
+        plt.legend(['PV', 'SumofPMT', 'AccumulatedInterest', 'FV'])
+        plt.xlabel('Year')
+        plt.ylabel('$(Millions)')
+        plt.show()
+    else:
+        return 0
 
 
 def createResults(x, pv, fv, i, n, pmt):
     resultsTxt = open("results.txt", 'a')
     resultsTxt.write(" ------ Input ------ \n")
-    if x in ( 1, 2, 3, 4, 5, 6):
+    if x in (1, 2, 3, 4, 5, 6):
         #FutureValue
         if x == 1:
             resultsTxt.write(date())
@@ -122,22 +126,31 @@ def FutureValue():
     n = int(input("Number of Periods: "))
     pmt = int(input("Payment($): ")) * -1
     save = input("Would you like to save the values? (y/n) ")
-    
+    sum_pmt = 0
+    sum_int = 0
     with open('tvm.csv', 'w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(["Year" , "PV", "PMT", "Interest", "FV"])
-        for x in range(1,n+1):
-            p_i= pv * i
-            fv = pv + p_i - pmt
+        with open('tvm_graph.csv', 'w', newline='') as file1:
+            writer = csv.writer(file)
+            writer1 = csv.writer(file1)
+            writer.writerow(["Year" , "PV", "PMT", "Interest", "FV"])
+            writer1.writerow(["Year", "PV", "SumofPMT", "AccumulatedInterest", "FV"])
+
+            for x in range(1,n+1):
+                p_i= pv * i
+                fv = pv + p_i - pmt
+                sum_pmt = pmt + sum_pmt
+                sum_int = p_i + sum_int
+                writer1.writerow([x, round(pv), round(-sum_pmt), round(sum_int), round(-fv)])
+
+                if (save == "y"):
+                    writer.writerow([x, round(pv), round(-pmt), round(p_i), round(-fv)])
+                    resultsTxt = open("results.txt", 'a')
+                    resultsTxt.write("Period:" + str(x) + " PV:{:.2f}".format(pv) + " PMT:" + str(pmt) + " Interest:{:.2f}".format(p_i) + " FV:{:.2f}".format(fv) + "\n")
+                    resultsTxt.close()
+                pv = fv
+            print("Future Value = ${:.2f}".format(fv))
             if (save == "y"):
-                writer.writerow([x, round(pv), round(-pmt), round(p_i), round(-fv)])
-                resultsTxt = open("results.txt", 'a')
-                resultsTxt.write("Period:" + str(x) + " PV:{:.2f}".format(pv) + " PMT:" + str(pmt) + " Interest:{:.2f}".format(p_i) + " FV:{:.2f}".format(fv) + "\n")
-                resultsTxt.close()
-            pv = fv
-        print("Future Value = ${:.2f}".format(fv))
-        if (save == "y"):
-            createResults(1, pv, fv, i, n, pmt)
+                createResults(1, pv, fv, i, n, pmt)
 
 # PV = FV / (1 + i) ** n
 # PVa = A/i * [1 - 1/ (1 + i)^n ]
@@ -231,6 +244,7 @@ while True:
             txtClear()
             clear()
             FutureValue()
+            tvm_visualizer()
         elif choice == 2:
             txtClear()
             clear()
