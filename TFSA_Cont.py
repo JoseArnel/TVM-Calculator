@@ -157,7 +157,9 @@ def Milli():
             print("It will take you " + str(count) + "years to be a millionaire by: " + str(count+18) + " \n")
             break
 
-tvm_calc('y', 50000, 0.07, 31, -6000)
+TFSA()
+
+# tvm_calc('y', 50000, 0.07, 31, -6000)
 
 # def PorfolioAlloc():
 #    value = int(input("Protfolio Value($): "))

@@ -10,6 +10,7 @@ from os import system, name
 # main screan, TVM Calculator / Other Financial Calc 
 # Display Screen, Terminal Based, Display Graphs, Can save as CSV, and 
 # Extra Tools: Millionare, before ..., TFSA Calculations, Interest
+# Implement Calculators,  Investments 
 #### 
 
 ## Check List
@@ -40,7 +41,6 @@ def tvm_visualizer():
         plt.show()
     else:
         return 0
-
 
 def createResults(x, pv, fv, i, n, pmt):
     resultsTxt = open("results.txt", 'a')
