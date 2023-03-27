@@ -10,7 +10,7 @@ from os import system, name
 # main screan, TVM Calculator / Other Financial Calc 
 # Display Screen, Terminal Based, Display Graphs, Can save as CSV, and 
 # Extra Tools: Millionare, before ..., TFSA Calculations, Interest
-# Implement Calculators,  Investments 
+# Implement Calculators, Interest, TVM, Investment  
 #### 
 
 ## Check List
