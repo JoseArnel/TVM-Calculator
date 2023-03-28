@@ -42,6 +42,20 @@ def tvm_visualizer():
     else:
         return 0
 
+def interest_visualizer():
+    choice = str(input("Would you like to show the values? (y/n) "))
+    if (choice == 'y'):
+        data = pd.read_csv('interest.csv')
+        plt.plot(data.Balance / 10**6)
+        plt.plot(data.Principal / 10**6)
+        plt.plot(data.Interest / 10**6)
+        plt.legend(['Principal', 'Interest', 'Balance'])
+        plt.xlabel("Year")
+        plt.ylabel("$(Millions)")
+        plt.show()
+    else:
+        return 0
+
 def createResults(x, pv, fv, i, n, pmt):
     resultsTxt = open("results.txt", 'a')
     resultsTxt.write(" ------ Input ------ \n")
@@ -116,6 +130,42 @@ def ROI():
     if (save == "y"):
         createResults(1,pv, fv, 0, 0,0)
 
+
+def Interest_calc():
+    pv = int(input("Present Value($): "))
+    i = float(input("Interest(%): "))/100
+    n = int(input("Number of Periods: "))
+    pmt = int(input("Payment($): ")) * -1
+    save = input("Would you like to save the values? (y/n) ")  
+    sum_pmt = 0
+    sum_int = 0
+    with open('interest.csv', 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["Year", "Balance", "Principal", "Interest"])
+        principal_s = pv 
+        balance_s = pv 
+        principal_e = pv
+        clear()
+        if (save == 'y'):
+            for x in range(1,n+1):
+                p_i= pv * i
+                fv = pv + p_i - pmt
+                principal_e = principal_s - pmt
+                print("   start_principal " + " start_balance" +   " interest " + " end_balance " + " end_principal ")
+                print(str(x) + " " +"{:.2f}".format(principal_s) +  "        " + "{:.2f}".format(balance_s) +  "     " + "{:.2f}".format(p_i)  + "  " + "{:.2f}".format(fv) +  "    " + "{:.2f}".format(principal_e))
+                sum_pmt = pmt + sum_pmt
+                sum_int = p_i + sum_int
+                writer.writerow([x, round(pv), round(-sum_pmt), round(sum_int), round(fv)])
+                principal_s = principal_s - pmt
+                balance_s = fv
+                pv = fv
+            print(" ")
+        else:
+            for x in range(1,n+1):
+                p_i= pv * i
+                fv = pv + p_i - pmt
+                pv = fv
+        return(fv)
 # Investment
 
 # FV = PV * (1 + i) ** n
@@ -140,7 +190,7 @@ def FutureValue():
                 fv = pv + p_i - pmt
                 sum_pmt = pmt + sum_pmt
                 sum_int = p_i + sum_int
-                writer1.writerow([x, round(pv), round(-sum_pmt), round(sum_int), round(-fv)])
+                writer1.writerow([x, round(-pv), round(sum_pmt), round(-sum_int), round(fv)])
 
                 if (save == "y"):
                     writer.writerow([x, round(pv), round(-pmt), round(p_i), round(-fv)])
@@ -225,18 +275,21 @@ def printDisplay():
     print("3.Interest")
     print("4.Periods")
     print("5.Payment")
+    # Other
     print("6.Return On Investments")
+    print("6.Interest Calculator")
+
 printDisplay()
 
 while True:
-    choice = int(input("Enter choice (0/1/2/3/4/5): "))
+    choice = int(input("Enter choice (0/1/2/3/4/5/6/7): "))
     
     if choice == 0:
         clear()
         printDisplay()
-        choice = int(input("Enter choice (0/1/2/3/4/5/6): "))
+        choice = int(input("Enter choice (0/1/2/3/4/5/6/7): "))
 
-    if choice in ( 1, 2, 3, 4, 5, 6):
+    if choice in ( 1, 2, 3, 4, 5, 6, 7):
         if choice == 0:
             clear()
             printDisplay()
@@ -265,6 +318,11 @@ while True:
             txtClear()
             clear()
             ROI()
+        elif choice == 7:
+            txtClear()
+            clear()
+            Interest_calc()
+            interest_visualizer()
     else:
         print("Input Invalid, 0 to see menu")
     
